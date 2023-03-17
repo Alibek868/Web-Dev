@@ -28,22 +28,22 @@ list.addEventListener('click', function(ev) {
 
 
 function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
+  var li1 = document.createElement("li");
+  var inputValue = document.getElementById("MyInput").value;
   var t = document.createTextNode(inputValue);
-  li.appendChild(t);
+  li1.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-    document.getElementById("myUL").appendChild(li);
+    document.getElementById("MyUl").appendChild(li1);
   }
-  document.getElementById("myInput").value = "";
+  document.getElementById("MyInput").value = "";
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
-  li.appendChild(span);
+  li1.appendChild(span);
 
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
