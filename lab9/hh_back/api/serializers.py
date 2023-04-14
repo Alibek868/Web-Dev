@@ -7,6 +7,7 @@ class VacancySerializer(serializers.ModelSerializer):
         model = Vacancy
         fields = ('name', 'description', 'salary', 'company')
 
+
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company

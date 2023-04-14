@@ -9,8 +9,8 @@ import json
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-@method_decorator(csrf_exempt, name='dispatch')
 
+@method_decorator(csrf_exempt, name='dispatch')
 class ProductsView(View):
     def get(self, request):
         cnt = Product.objects.count()  # TOTAL books in the database
@@ -26,6 +26,7 @@ class ProductsView(View):
             }
             data[product.id] = p
         return JsonResponse(data)
+
     def post(self, request):
         post_body = json.loads(request.body)
         name = post_body.get('name')
@@ -35,13 +36,15 @@ class ProductsView(View):
         is_active = post_body.get('is_active')
 
         product_data = {
-            'name': str(name), 'price': float(price), 'description': str(description), 'count': int(count), 'is_active': bool(is_active)
+            'name': str(name), 'price': float(price), 'description': str(description), 'count': int(count),
+            'is_active': bool(is_active)
         }
         obj = Product.objects.create(**product_data)
         data = {
             'message': f'Product created: {obj.id}'
         }
         return JsonResponse(data)
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ProductView(View):
@@ -60,6 +63,7 @@ class ProductView(View):
                 'error': 'No such Product'
             }
         return JsonResponse(data)
+
     def put(self, request, product_id):
         if Product.objects.filter(id=product_id).exists():
             product = Product.objects.get(id=product_id)
@@ -93,6 +97,7 @@ class ProductView(View):
         }
         return JsonResponse(data)
 
+
 @method_decorator(csrf_exempt, name='dispatch')
 class CategoriesView(View):
     def get(self, request):
@@ -106,7 +111,7 @@ class CategoriesView(View):
             data[category.id] = p
         return JsonResponse(data)
 
-    def post(self,request):
+    def post(self, request):
         body = json.loads(request.body)
         name = body.get('name')
         cat_data = {
@@ -117,6 +122,7 @@ class CategoriesView(View):
             'message': f'Category created: {obj.id}'
         }
         return JsonResponse(data)
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class CategoryView(View):
